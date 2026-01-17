@@ -1,0 +1,16 @@
+{
+  "$schema": "https://cdn.jsdelivr.net/npm/@anthropic-ai/claude-code@latest/config-schema.json",
+  "permissions": {
+    "allow": [
+      "Bash(dir:*)",
+      "Bash(ls:*)",
+      "Bash(git:*)"
+    ],
+    "deny": []
+  },
+  "settings": {
+    "contextPaths": [
+      "CLAUDE.md"
+    ]
+  }
+}

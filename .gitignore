@@ -1,0 +1,102 @@
+# RetroArch Portable - Git Ignore Rules
+# Goal: Track configuration, ignore binaries and personal data
+
+# ======================
+# Executables and DLLs
+# ======================
+*.exe
+*.dll
+
+# ======================
+# Stock RetroArch Content
+# (Re-download with fresh RetroArch install)
+# ======================
+/assets/
+/database/
+/info/
+/overlays/
+/shaders/
+/filters/
+/platforms/
+
+# ======================
+# User Data (Personal/Machine-Specific)
+# ======================
+/saves/
+/states/
+/screenshots/
+/recordings/
+/thumbnails/
+
+# ======================
+# System Files (BIOS - Legal Concerns)
+# ======================
+/system/
+
+# ======================
+# Cores (Large binaries, download per-machine)
+# ======================
+/cores/
+
+# ======================
+# Logs and Temp Files
+# ======================
+*.log
+/logs/
+*.tmp
+*.bak
+
+# ======================
+# RetroArch Runtime Files
+# ======================
+retroarch.lpl
+/playlists/*.lpl
+content_history.lpl
+content_favorites.lpl
+content_music_history.lpl
+content_video_history.lpl
+content_image_history.lpl
+
+# ======================
+# Qt Configuration
+# ======================
+qt.conf
+
+# ======================
+# Default Config (Reference Only)
+# ======================
+retroarch.default.cfg
+
+# ======================
+# Web Shortcuts
+# ======================
+*.url
+
+# ======================
+# IDE and Editor Files
+# ======================
+.vscode/
+*.swp
+*.swo
+*~
+
+# ======================
+# OS Generated Files
+# ======================
+Thumbs.db
+.DS_Store
+desktop.ini
+nul
+
+# ======================
+# Controller Autoconfig (Stock profiles)
+# ======================
+/autoconfig/
+
+# ======================
+# KEEP THESE (Not Ignored)
+# ======================
+# retroarch.cfg          - Main user configuration
+# CLAUDE.md              - Project documentation
+# .gitignore             - This file
+# .claude/               - Claude Code settings
