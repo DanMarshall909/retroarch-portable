@@ -39,9 +39,9 @@
 /roms/
 
 # ======================
-# Cores (Large binaries, download per-machine)
+# Cores - Track our selected cores
 # ======================
-/cores/
+# (cores/*.dll are tracked via git add -f)
 
 # ======================
 # Logs and Temp Files
