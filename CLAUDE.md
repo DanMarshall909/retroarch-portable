@@ -13,118 +13,131 @@ This is a portable RetroArch setup designed for easy cloning and deployment acro
 
 ```
 RetroArch-Win64/
-├── retroarch.exe           # Main executable
-├── retroarch.cfg           # User configuration (create from default)
-├── retroarch.default.cfg   # Default settings template (reference only)
+├── retroarch.exe           # Main executable (download separately)
+├── retroarch.cfg           # User configuration
 ├── CLAUDE.md               # This file - project documentation
 ├── .gitignore              # Git ignore rules
 │
-├── assets/                 # UI themes (glui, ozone, rgui, xmb)
-├── autoconfig/             # Controller profiles (dinput, hid, sdl2, xinput)
-├── database/               # Game databases (.rdb files)
-├── info/                   # Core information files
-├── overlays/               # Visual overlays and borders
-├── shaders/                # GLSL shader effects
-├── filters/                # Video filters
-│
-├── cores/                  # Emulator cores (download as needed)
-├── saves/                  # Game saves (per-core subdirectories)
+├── cores/                  # Emulator cores (tracked in git)
+├── roms/                   # Game ROMs (ignored - add your own)
+│   ├── NES/
+│   ├── SNES/
+│   ├── Genesis/
+│   ├── GB/
+│   ├── GBA/
+│   ├── N64/
+│   ├── PS1/
+│   ├── Atari2600/
+│   └── Arcade/
+├── system/                 # BIOS files (ignored - add your own)
+├── saves/                  # Game saves
 ├── states/                 # Save states
-├── screenshots/            # Captured screenshots
-├── system/                 # BIOS and system ROM files
-└── playlists/              # Game playlists
+└── screenshots/            # Captured screenshots
 ```
 
-## Configuration Approach
+## Quick Start
 
-### Files to Track in Git
-- `retroarch.cfg` - Main configuration
-- `CLAUDE.md` - Documentation
-- `.gitignore` - Ignore rules
-- Custom controller configs in `autoconfig/`
-- Custom playlists in `playlists/`
+### Cloning to a New Computer
+```bash
+git clone https://github.com/DanMarshall909/retroarch-portable.git
+```
+Then:
+1. Download RetroArch portable from https://www.retroarch.com/
+2. Extract to this folder (merge with existing files)
+3. Add your ROMs to appropriate `roms/` subfolders
+4. Add BIOS files to `system/` if needed (PS1, Neo Geo)
 
-### Files to Ignore (machine-specific or large)
-- `*.dll` - Runtime libraries
-- `cores/` - Large binary files, download per-machine
-- `saves/` - Personal save data
-- `states/` - Save states
-- `screenshots/` - Screenshots
-- `system/` - BIOS files (legal concerns)
-- `assets/`, `database/`, `shaders/`, `overlays/` - Stock RetroArch content
+### Launching Games
+```bash
+# SNES
+retroarch.exe -L cores/snes9x_libretro.dll "roms/SNES/game.zip"
 
-## Setup Instructions
+# NES
+retroarch.exe -L cores/mesen_libretro.dll "roms/NES/game.zip"
 
-### First Time Setup
-1. Clone this repository
-2. Download RetroArch portable from https://www.retroarch.com/
-3. Extract to this folder (merge with existing files)
-4. Download desired cores via RetroArch menu (Online Updater > Core Downloader)
-5. Add BIOS files to `system/` folder as needed
+# Genesis
+retroarch.exe -L cores/genesis_plus_gx_libretro.dll "roms/Genesis/game.zip"
 
-### Syncing to Another Computer
-1. Clone the repository
-2. Download fresh RetroArch portable and extract
-3. Your configuration will be applied automatically
+# Arcade (MAME 2003 Plus - works with older ROM dumps)
+retroarch.exe -L cores/mame2003_plus_libretro.dll "roms/Arcade/game.zip"
+```
 
-## Common Tasks
+## Installed Cores
 
-### Adding a New Core
-1. Open RetroArch
-2. Go to: Main Menu > Online Updater > Core Downloader
-3. Select and download the desired core
-
-### Updating Configuration
-1. Make changes in RetroArch
-2. Settings are saved to `retroarch.cfg`
-3. Commit changes: `git add retroarch.cfg && git commit -m "description"`
-
-### Controller Setup
-1. Connect controller
-2. Go to: Settings > Input > Port 1 Controls
-3. Configure and save
-4. Custom profiles saved to `autoconfig/`
+| System | Core File | Notes |
+|--------|-----------|-------|
+| NES | mesen_libretro.dll | Highly accurate |
+| SNES | snes9x_libretro.dll | Good balance of speed/accuracy |
+| Genesis/Mega Drive | genesis_plus_gx_libretro.dll | Excellent compatibility |
+| Atari 2600 | stella_libretro.dll | Full featured |
+| Game Boy/GBC | gambatte_libretro.dll | Accurate |
+| GBA | mgba_libretro.dll | Modern, accurate |
+| PS1 | swanstation_libretro.dll | Requires BIOS in system/ |
+| N64 | mupen64plus_next_libretro.dll | Good compatibility |
+| Arcade | mame2003_plus_libretro.dll | Best for older ROM dumps |
+| Arcade | fbneo_libretro.dll | Needs exact modern romsets |
 
 ## Key Configuration Settings
 
-Settings we've customized from defaults:
-
 | Setting | Value | Reason |
 |---------|-------|--------|
-| (none yet) | | |
+| video_driver | d3d11 | Best Windows compatibility |
+| video_shader | crt-easymode.slangp | Authentic CRT scanlines |
+| video_shader_enable | true | Shaders on by default |
+| menu_driver | xmb | PlayStation-style menu |
+| input_joypad_driver | dinput | Better generic controller support |
+| log_verbosity | true | Helps debug ROM issues |
 
-## Recommended Cores
+## BIOS Requirements
 
-| System | Core | Notes |
-|--------|------|-------|
-| NES | mesen | Highly accurate |
-| SNES | bsnes | Accuracy focused |
-| Genesis | genesis_plus_gx | Good compatibility |
-| Game Boy | gambatte | Accurate |
-| GBA | mgba | Modern, accurate |
-| PS1 | duckstation | Best PS1 emulation |
-| N64 | mupen64plus_next | Good compatibility |
+| System | BIOS File | Location |
+|--------|-----------|----------|
+| PS1 | scph1001.bin (or similar) | system/ |
+| Neo Geo | neogeo.zip | system/ |
+
+## Arcade ROM Notes
+
+**MAME 2003 Plus** works better with older ROM dumps (from early 2000s).
+**FinalBurn Neo** requires exact modern MAME romset versions.
+
+If arcade ROMs fail to load, check `logs/retroarch.log` for missing files.
+
+## Controls
+
+| Action | Key |
+|--------|-----|
+| Open Menu | F1 |
+| Toggle Fullscreen | F |
+| Quit | Esc |
+| Save State | F2 |
+| Load State | F4 |
+| Toggle Shader | M |
 
 ## Troubleshooting
 
-### RetroArch won't start
-- Ensure all DLL files are present
-- Try running as administrator
-- Check Windows Defender isn't blocking
+### ROM won't load
+- Check `logs/retroarch.log` for specific errors
+- Arcade ROMs often need exact file names/CRCs
+- Some systems need BIOS files in `system/`
 
 ### Controller not detected
-- Check controller is connected before starting RetroArch
-- Try different input driver (Settings > Drivers > Input)
-- Update controller firmware
+- Connect controller before starting RetroArch
+- Try Settings > Drivers > Input > dinput
+- Press F1 > Settings > Input to remap
 
-### Audio crackling
-- Increase audio latency (Settings > Audio > Output > Audio Latency)
-- Try different audio driver
+### No CRT shader effect
+- Shader must match video driver (Slang for D3D11, GLSL for OpenGL)
+- Press F1 > Shaders to manually load
 
-## Development Notes
+## Git Workflow
 
-When working with Claude Code on this project:
-- Make small, incremental changes
-- Test each change before committing
-- Document configuration choices in this file
-- Use descriptive commit messages
+```bash
+# After making settings changes
+git add retroarch.cfg .gitignore CLAUDE.md
+git commit -m "Update settings"
+git push
+```
+
+## Repository
+
+https://github.com/DanMarshall909/retroarch-portable
