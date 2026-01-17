@@ -47,7 +47,9 @@
 # Logs and Temp Files
 # ======================
 *.log
+*.lrtl
 /logs/
+/playlists/logs/
 *.tmp
 *.bak
 
@@ -105,4 +107,3 @@ nul
 # CLAUDE.md              - Project documentation
 # .gitignore             - This file
 # .claude/               - Claude Code settings
-playlists/logs/Snes9x/Super Mario World (USA).lrtl
