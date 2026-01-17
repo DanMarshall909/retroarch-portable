@@ -15,7 +15,9 @@
       "Bash(gh repo create:*)",
       "Bash(gh repo view:*)",
       "Bash(curl:*)",
-      "Bash(unzip:*)"
+      "Bash(unzip:*)",
+      "Bash(ls:*)",
+      "Bash(git push)"
     ]
   }
 }
