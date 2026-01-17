@@ -34,6 +34,11 @@
 /system/
 
 # ======================
+# ROMs (Legal Concerns)
+# ======================
+/roms/
+
+# ======================
 # Cores (Large binaries, download per-machine)
 # ======================
 /cores/
@@ -100,3 +105,4 @@ nul
 # CLAUDE.md              - Project documentation
 # .gitignore             - This file
 # .claude/               - Claude Code settings
+playlists/logs/Snes9x/Super Mario World (USA).lrtl
